@@ -1,0 +1,29 @@
+﻿version: "3.9"
+services:
+  codebook-mongodb:
+    container_name: codebook_mongodb
+    image: mongo:5.0
+    environment:
+      MONGO_INITDB_DATABASE: CodebookDb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ~/codebook-db:/data/db
+      - ./Extras/mongoSetup.js:/docker-entrypoint-initdb.d/mongoSetup.js
+    networks:
+      - mongodb_network
+  codebook-server:
+    container_name: codebook_server
+    build: .
+    ports:
+      - "60000:80"
+    networks:
+      - mongodb_network
+      - app_network
+    extra_hosts:
+      host.docker.internal: host-gateway
+networks:
+  mongodb_network:
+    name: mongodb_network
+  app_network:
+    name: app_network
