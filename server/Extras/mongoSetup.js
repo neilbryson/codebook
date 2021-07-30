@@ -1,6 +1,6 @@
 ﻿db.Codebook.drop();
 db.Codebook.insert({
-  dateLastModified: Date.now(),
-  fileName: 'sample.txt',
-  source: 'Hello world!',
+  DateLastModified: new Date(),
+  FileName: 'sample.txt',
+  Source: 'Hello world!',
 });

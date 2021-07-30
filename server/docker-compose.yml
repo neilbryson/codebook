@@ -9,13 +9,14 @@ services:
       - "27017:27017"
     volumes:
       - ~/codebook-db:/data/db
-      - ./Extras/mongoSetup.js:/docker-entrypoint-initdb.d/mongoSetup.js
+      - ./Extras/:/docker-entrypoint-initdb.d/
     networks:
       - mongodb_network
   codebook-server:
     container_name: codebook_server
     build: .
     ports:
+      - "60001:443"
       - "60000:80"
     networks:
       - mongodb_network
