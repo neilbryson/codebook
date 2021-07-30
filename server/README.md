@@ -18,6 +18,20 @@ NOTE : Don't forget to start the MongoDB instance.
 
 A Swagger documentation is available on https://localhost:5001/swagger
 
+## Release build
+
+```bash
+dotnet publish -c Release -o build
+```
+
+This generates all the necessary libraries at `build/`.
+
+To run the release build :
+
+```bash
+dotnet build/CodebookServer.dll
+```
+
 ## Docker build
 
 A Docker setup is provided which includes both the .NET server and MongoDB.
