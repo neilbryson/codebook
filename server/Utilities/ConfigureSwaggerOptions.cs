@@ -20,7 +20,7 @@ namespace CodebookServer.Utilities
                     description.GroupName,
                     new OpenApiInfo
                     {
-                        Title = $"Todo server v{description.ApiVersion}",
+                        Title = $"Codebook server v{description.ApiVersion}",
                         Version = description.ApiVersion.ToString(),
                     }
                 );

@@ -48,7 +48,7 @@ namespace CodebookServer.Controllers
             }
         }
 
-        [HttpGet("{id:length(24)}", Name = "GetTodo")]
+        [HttpGet("{id:length(24)}", Name = "GetCode")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Code> Get(string id)
@@ -79,7 +79,7 @@ namespace CodebookServer.Controllers
                 code.DateLastModified = DateTime.Now;
                 _codeService.Create(code);
                 _logger.LogInformation("[{Create}] Created {Id}", nameof(Create), code.Id);
-                return CreatedAtRoute("GetTodo", new {id = code.Id}, code);
+                return CreatedAtRoute("GetCode", new {id = code.Id}, code);
             }
             catch (Exception e)
             {
