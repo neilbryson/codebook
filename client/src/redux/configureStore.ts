@@ -7,7 +7,7 @@ import { rootReducer } from './rootReducer';
 import { routesMap } from './routing/routesMap';
 
 const { reducer, middleware, enhancer } = connectRoutes(routesMap, {
-  basename: import.meta.env.BASE_URL || '/',
+  basename: import.meta.env.BASE_URL || '',
 });
 const reducers = combineReducers({ ...rootReducer, location: reducer });
 const middlewares = applyMiddleware(thunk, middleware);
