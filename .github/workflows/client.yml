@@ -38,9 +38,9 @@ jobs:
         run: |
           touch .env.production
           cat > .env.production << EOL
-          VITE_SERVER_HOST=${VITE_SERVER_HOST}
-          VITE_SERVER_PORT=${VITE_SERVER_PORT}
-          VITE_SERVER_PROTOCOL=${VITE_SERVER_PROTOCOL}
+          VITE_SERVER_HOST="$VITE_SERVER_HOST"
+          VITE_SERVER_PORT="$VITE_SERVER_PORT"
+          VITE_SERVER_PROTOCOL="$VITE_SERVER_PROTOCOL"
           EOL
       - name: Build bundle
         run: npm run build
