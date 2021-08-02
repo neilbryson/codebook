@@ -30,5 +30,22 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies
         run: npm ci
+      - name: Prepare build
+        env:
+          VITE_SERVER_HOST: ${{ secrets.VITE_SERVER_HOST }}
+          VITE_SERVER_PORT: ${{ secrets.VITE_SERVER_PORT }}
+          VITE_SERVER_PROTOCOL: ${{ secrets.VITE_SERVER_PROTOCOL }}
+        run: |
+          touch .env.production
+          cat > .env.production << EOL
+          VITE_SERVER_HOST=${VITE_SERVER_HOST}
+          VITE_SERVER_PORT=${VITE_SERVER_PORT}
+          VITE_SERVER_PROTOCOL=${VITE_SERVER_PROTOCOL}
+          EOL
       - name: Build bundle
         run: npm run build
+      - name: Deploy to GitHub pages
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages
+          folder: dist
