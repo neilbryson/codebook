@@ -2,7 +2,7 @@
   "name": "codebook-client",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://neilbryson.github.io/codebook",
+  "homepage": "https://neilbryson.github.io/codebook/",
   "dependencies": {
     "axios": "^0.21.1",
     "codemirror": "^5.62.2",
