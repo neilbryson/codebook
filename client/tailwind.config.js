@@ -15,7 +15,9 @@ module.exports = {
     },
   },
   variants: {
-
+    extend: {
+      margin: ['last'],
+    },
   },
   plugins: [],
 };

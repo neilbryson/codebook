@@ -69,15 +69,21 @@ export const CodeEditorView = (): ReactElement<HTMLElement> => {
 
   return (
     <section className="h-full flex flex-col">
-      <TextInput
-        className="w-full mb-4 font-bold"
-        placeholder="File name"
-        onBlur={onBlurFileName}
-        onChange={onChangeFileName}
-        value={fileName}
-      />
+      <div className="flex items-center content-center mb-4">
+        <TextInput
+          className="w-full font-bold mr-4"
+          placeholder="File name"
+          onBlur={onBlurFileName}
+          onChange={onChangeFileName}
+          value={fileName}
+          title="File name"
+        />
+        <Button className="mr-4 last:mr-0" title="Save">
+          💾
+        </Button>
+        {codeValue?.id && <Button title="Delete">🗑️</Button>}
+      </div>
       <div className="h-full mb-4 overflow-hidden" ref={editorRef} />
-      <Button>Save</Button>
     </section>
   );
 };
