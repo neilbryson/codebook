@@ -10,6 +10,6 @@ export const routesMap: RoutesMap = {
     path: '/',
   },
   [Routes.CODE_EDITOR]: {
-    path: '/code-editor/:id?',
+    path: '/code/:id?',
   },
 };

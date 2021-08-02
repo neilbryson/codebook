@@ -28,7 +28,7 @@ export const CodeEditorView = (): ReactElement<HTMLElement> => {
   }, []);
 
   useEffect(() => {
-    if (editorRef.current) {
+    if (editorRef.current && !editorInstance.current) {
       editorInstance.current = CodeMirror(editorRef.current, {
         mode: codeValue?.fileName ? detectLanguage(codeValue.fileName) : '',
         value: codeValue?.source ?? '',
@@ -38,6 +38,15 @@ export const CodeEditorView = (): ReactElement<HTMLElement> => {
       editorInstance.current.on('change', onEditorUpdate);
     }
   }, [codeValue, onEditorUpdate]);
+
+  // Handling for route changes within Routes.CODE_EDITOR
+  useEffect(() => {
+    setFileName(codeValue?.fileName ?? '');
+
+    if (editorInstance.current) {
+      editorInstance.current.setValue(codeValue?.source ?? '');
+    }
+  }, [codeValue]);
 
   useEffect(() => {
     if (editorInstance.current) {
@@ -62,10 +71,10 @@ export const CodeEditorView = (): ReactElement<HTMLElement> => {
     <section className="h-full flex flex-col">
       <TextInput
         className="w-full mb-4 font-bold"
-        defaultValue={fileName}
         placeholder="File name"
         onBlur={onBlurFileName}
         onChange={onChangeFileName}
+        value={fileName}
       />
       <div className="h-full mb-4 overflow-hidden" ref={editorRef} />
       <Button>Save</Button>

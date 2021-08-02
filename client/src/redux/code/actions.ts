@@ -2,26 +2,6 @@ import type { ThunkAction } from '../../types/Redux';
 import { api } from '../../utilities/api';
 import * as types from './types';
 
-export function addCode(
-  fileName: string,
-  sourceCode: string
-): ThunkAction<types.AddCodeStart | types.AddCodeSuccess | types.AddCodeError> {
-  return async (dispatch) => {
-    dispatch({ type: types.ThunkActions.ADD_CODE_START });
-
-    try {
-      const { data } = await api<types.CodeItem>({
-        data: { fileName, sourceCode },
-        method: 'post',
-        url: '/api/v1/code',
-      });
-      dispatch({ payload: data, type: types.ThunkActions.ADD_CODE_SUCCESS });
-    } catch (e: unknown) {
-      dispatch({ type: types.ThunkActions.ADD_CODE_ERROR });
-    }
-  };
-}
-
 export function getCodeList(
   pageSize = 0,
   pageNumber = 1,
