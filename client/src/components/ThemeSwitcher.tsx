@@ -12,7 +12,10 @@ export const ThemeSwitcher = (): ReactElement<HTMLDivElement> => {
 
   function renderSelection(themeType: ThemeTypes, character: string): ReactElement<HTMLSpanElement> {
     return (
-      <span className={`${themeType === currentTheme ? 'text-3xl' : 'text-md'} select-none`} onClick={toggle}>
+      <span
+        className={`${themeType === currentTheme ? 'text-3xl' : 'text-md'} cursor-pointer select-none`}
+        onClick={toggle}
+      >
         {character}
       </span>
     );
