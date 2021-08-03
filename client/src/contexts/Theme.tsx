@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useCallback, useContext, useLayoutEffe
 
 import { THEME_KEY } from '../constants/storageKeys';
 
-export const enum ThemeTypes {
+export enum ThemeTypes {
   LIGHT = 'light',
   DARK = 'dark',
 }

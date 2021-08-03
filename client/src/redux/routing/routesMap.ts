@@ -1,6 +1,6 @@
 import type { RoutesMap } from 'redux-first-router';
 
-export const enum Routes {
+export enum Routes {
   HOME = 'route/HOME',
   CODE_EDITOR = 'route/CODE_EDITOR',
 }
