@@ -14,7 +14,7 @@ await $`mkdir ./src`;
 await $`babel --no-babelrc --presets @babel/preset-typescript --out-file-extension \".jsx\" ./srcTS -d ./src --extensions \".js,.jsx,.ts,.tsx\" --ignore "./srcTS/typings.d.ts"`;
 
 // Format the newly created .js files
-await $`prettier --write ./src`;
+await $`prettier --no-config --no-editorconfig --single-quote --trailingComma es5 --semi true --write ./src`;
 
 // Copy css
 await $`cp -r ./srcTS/styles ./src/styles`
