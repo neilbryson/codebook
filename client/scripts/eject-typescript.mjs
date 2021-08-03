@@ -20,6 +20,9 @@ await $`printf "export {};" >> ./src/dummy.ts`;
 await $`touch ./src/typings.d.ts`;
 await $`printf 'declare module "global";' >> ./src/typings.d.ts`;
 
+// Copy css
+await $`cp -r ./srcTS/styles ./src/styles`
+
 // Clean up
 await $`rm -rf ./srcTS`;
 
