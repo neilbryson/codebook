@@ -22,7 +22,7 @@ await $`cp -r ./srcTS/styles ./src/styles`
 // Add reference to the TypeScript types, so there will still be auto-completion
 // and type checking even in JavaScript files.
 await $`touch src/index.d.ts`;
-await $`echo '/// <reference path="../ejectTypes/index.d.ts">' > ./src/index.d.ts`;
+await $`echo '/// <reference path="../ejectTypes/index.d.ts" />' > ./src/index.d.ts`;
 
 // Clean up
 await $`rm -rf ./srcTS`;
