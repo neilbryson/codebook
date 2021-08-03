@@ -8,7 +8,7 @@ await $`rm -rf ./src`;
 await $`mkdir ./src`;
 
 // Convert TS code to JS
-await $`babel --no-babelrc --presets @babel/preset-typescript ./srcTS -d ./src --extensions \".js,.jsx,.ts,.tsx\" --ignore "./srcTS/typings.d.ts"`;
+await $`babel --no-babelrc --presets @babel/preset-typescript --out-file-extension \".jsx\" ./srcTS -d ./src --extensions \".js,.jsx,.ts,.tsx\" --ignore "./srcTS/typings.d.ts"`;
 
 // Format the newly created .js files
 await $`prettier --write ./src`;
@@ -22,5 +22,7 @@ await $`printf 'declare module "global";' >> ./src/typings.d.ts`;
 
 // Clean up
 await $`rm -rf ./srcTS`;
+
+await $`sed -i 's/index.tsx/index.jsx/' index.html`;
 
 console.log('TypeScript ejection complete');
