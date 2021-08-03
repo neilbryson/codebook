@@ -27,6 +27,10 @@ await $`echo '/// <reference path="../ejectTypes/index.d.ts">' > ./src/index.d.t
 // Clean up
 await $`rm -rf ./srcTS`;
 
+// Change reference of React entrypoint
 await $`sed -i 's/index.tsx/index.jsx/' index.html`;
+
+// Remove TypeScript checker from Vite configs
+await $`sed -i '/checker/d' vite.config.js`;
 
 console.log('TypeScript ejection complete');
