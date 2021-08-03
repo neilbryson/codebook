@@ -2,6 +2,9 @@
 
 // https://github.com/storybookjs/addon-kit/blob/main/scripts/eject-typescript.mjs
 
+// Emit TypeScript declarations
+await $`tsc --declaration --emitDeclarationOnly --isolatedModules false --outfile codebook.js`;
+
 // Copy TS files and delete src
 await $`cp -r ./src ./srcTS`;
 await $`rm -rf ./src`;
@@ -13,15 +16,11 @@ await $`babel --no-babelrc --presets @babel/preset-typescript --out-file-extensi
 // Format the newly created .js files
 await $`prettier --write ./src`;
 
-// Add in minimal files required for the TS build setup
-await $`touch ./src/dummy.ts`;
-await $`printf "export {};" >> ./src/dummy.ts`;
-
-await $`touch ./src/typings.d.ts`;
-await $`printf 'declare module "global";' >> ./src/typings.d.ts`;
-
 // Copy css
 await $`cp -r ./srcTS/styles ./src/styles`
+
+// Copy types
+await $`mv codebook.d.ts ./src/codebook.d.ts`;
 
 // Clean up
 await $`rm -rf ./srcTS`;

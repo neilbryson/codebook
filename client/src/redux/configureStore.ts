@@ -15,5 +15,4 @@ const enhancers = composeWithDevTools(enhancer, middlewares);
 export const store = createStore(reducers, enhancers);
 
 export type RootState = ReturnType<typeof store.getState>;
-export type LocationState = ReturnType<typeof reducer>;
 export type AppDispatch = ReturnType<typeof store.dispatch>;
