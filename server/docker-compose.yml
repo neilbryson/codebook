@@ -10,8 +10,6 @@ services:
     volumes:
       - ~/codebook-db:/data/db
       - ./Extras/:/docker-entrypoint-initdb.d/
-    networks:
-      - mongodb_network
   codebook-server:
     container_name: codebook_server
     build: .
@@ -19,12 +17,9 @@ services:
       - "60001:443"
       - "60000:80"
     networks:
-      - mongodb_network
-      - app_network
+      - codebook_network
     extra_hosts:
       host.docker.internal: host-gateway
 networks:
-  mongodb_network:
-    name: mongodb_network
-  app_network:
-    name: app_network
+  codebook_network:
+    name: codebook_network
