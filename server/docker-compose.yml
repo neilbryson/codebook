@@ -16,10 +16,5 @@ services:
     ports:
       - "60001:443"
       - "60000:80"
-    networks:
-      - codebook_network
     extra_hosts:
       host.docker.internal: host-gateway
-networks:
-  codebook_network:
-    name: codebook_network
