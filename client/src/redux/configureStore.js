@@ -13,6 +13,3 @@ const reducers = combineReducers({ ...rootReducer, location: reducer });
 const middlewares = applyMiddleware(thunk, middleware);
 const enhancers = composeWithDevTools(enhancer, middlewares);
 export const store = createStore(reducers, enhancers);
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = ReturnType<typeof store.dispatch>;

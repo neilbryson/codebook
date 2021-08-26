@@ -1,29 +1,28 @@
 import CodeMirror from 'codemirror';
-import React, { ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Button } from '../components/Button';
 import { TextInput } from '../components/TextInput';
 import { ThemeTypes, useTheme } from '../contexts/Theme';
 import { useAppSelector } from '../hooks/redux';
-import { CodeItem } from '../redux/code/types';
 import { detectLanguage } from '../utilities/detectLanguage';
 
-export const CodeEditorView = (): ReactElement<HTMLElement> => {
+export const CodeEditorView = () => {
   const { currentTheme } = useTheme();
-  const editorRef = useRef<HTMLDivElement>(null);
-  const editorInstance = useRef<CodeMirror.Editor | null>(null);
+  const editorRef = useRef(null);
+  const editorInstance = useRef(null);
   const { codeIds, codeList, locationPayload } = useAppSelector((state) => ({
     codeIds: state.code.codeIds,
     codeList: state.code.codeList,
     locationPayload: state.location.payload,
   }));
-  const codeValue: CodeItem | null = useMemo(() => {
+  const codeValue = useMemo(() => {
     const isValidId = typeof locationPayload.id === 'string' && codeIds.includes(locationPayload.id);
     return isValidId ? codeList[locationPayload.id] : null;
   }, [locationPayload, codeIds, codeList]);
   const [fileName, setFileName] = useState(codeValue?.fileName ?? '');
   const [source, setSource] = useState(codeValue?.source ?? '');
-  const onEditorUpdate = useCallback((instance: CodeMirror.Editor, e: CodeMirror.EditorChange): void => {
+  const onEditorUpdate = useCallback((instance, e) => {
     setSource(instance.getValue());
   }, []);
 
@@ -37,9 +36,8 @@ export const CodeEditorView = (): ReactElement<HTMLElement> => {
       editorInstance.current.setSize('100%', '100%');
       editorInstance.current.on('change', onEditorUpdate);
     }
-  }, [codeValue, onEditorUpdate]);
+  }, [codeValue, onEditorUpdate]); // Handling for route changes within Routes.CODE_EDITOR
 
-  // Handling for route changes within Routes.CODE_EDITOR
   useEffect(() => {
     setFileName(codeValue?.fileName ?? '');
 
@@ -55,15 +53,16 @@ export const CodeEditorView = (): ReactElement<HTMLElement> => {
     }
   }, [currentTheme]);
 
-  function onBlurFileName(e: React.FocusEvent<HTMLInputElement>): void {
+  function onBlurFileName(e) {
     if (!e.target.value) return;
     const languageType = detectLanguage(e.target.value);
+
     if (editorInstance.current) {
       editorInstance.current.setOption('mode', languageType);
     }
   }
 
-  function onChangeFileName(e: React.ChangeEvent<HTMLInputElement>): void {
+  function onChangeFileName(e) {
     setFileName(e.target.value);
   }
 

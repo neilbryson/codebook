@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { ThemeTypes, useTheme } from '../contexts/Theme';
 
-export const ThemeSwitcher = (): ReactElement<HTMLDivElement> => {
+export const ThemeSwitcher = () => {
   const { changeTheme, currentTheme } = useTheme();
 
-  function toggle(): void {
+  function toggle() {
     if (currentTheme === ThemeTypes.DARK) changeTheme(ThemeTypes.LIGHT);
     else changeTheme(ThemeTypes.DARK);
   }

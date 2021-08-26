@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { CodePreview } from '../components/CodePreview';
@@ -7,7 +7,7 @@ import { getCodeList } from '../redux/code/actions';
 import { navigateTo } from '../redux/routing/navigateTo';
 import { Routes } from '../redux/routing/routesMap';
 
-export const HomeView = (): ReactElement => {
+export const HomeView = () => {
   const dispatch = useDispatch();
   const { codeIds, codeList } = useAppSelector((state) => ({
     codeIds: state.code.codeIds,
@@ -18,11 +18,16 @@ export const HomeView = (): ReactElement => {
     dispatch(getCodeList());
   }, [dispatch]);
 
-  function onClickPreview(id: string): () => void {
-    return () => dispatch(navigateTo(Routes.CODE_EDITOR, { id }));
+  function onClickPreview(id) {
+    return () =>
+      dispatch(
+        navigateTo(Routes.CODE_EDITOR, {
+          id,
+        })
+      );
   }
 
-  function renderList(): ReturnType<typeof CodePreview>[] {
+  function renderList() {
     return codeIds.map((id) => {
       const { dateLastModified, fileName } = codeList[id];
       return (

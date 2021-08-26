@@ -1,32 +1,22 @@
-import React, { createContext, ReactNode, useCallback, useContext, useLayoutEffect, useMemo, useState } from 'react';
+import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useState } from 'react';
 
 import { THEME_KEY } from '../constants/storageKeys';
 
-export enum ThemeTypes {
-  LIGHT = 'light',
-  DARK = 'dark',
-}
+export const ThemeTypes = {
+  LIGHT: 'light',
+  DARK: 'dark',
+};
 
-interface ThemeContextProps {
-  changeTheme: (toTheme: ThemeTypes) => void;
-  currentTheme: ThemeTypes;
-}
-
-interface ThemeProviderProps {
-  children: ReactNode;
-}
-
-export const ThemeContext = createContext<ThemeContextProps>({
+export const ThemeContext = createContext({
   changeTheme: () => void 0,
   currentTheme: ThemeTypes.DARK,
 });
 
-export const useTheme = (): ThemeContextProps => useContext(ThemeContext);
+export const useTheme = () => useContext(ThemeContext);
 
-export const ThemeProvider = ({ children }: ThemeProviderProps): ReturnType<typeof ThemeContext.Provider> => {
+export const ThemeProvider = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState(ThemeTypes.LIGHT);
-
-  const changeTheme = useCallback((toTheme: ThemeTypes) => {
+  const changeTheme = useCallback((toTheme) => {
     if (toTheme === 'dark') {
       document.documentElement.classList.add('dark');
       localStorage.setItem(THEME_KEY, 'dark');
@@ -37,7 +27,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps): ReturnType<type
       setCurrentTheme(ThemeTypes.LIGHT);
     }
   }, []);
-
   const contextValues = useMemo(
     () => ({
       changeTheme,
@@ -45,7 +34,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps): ReturnType<type
     }),
     [changeTheme, currentTheme]
   );
-
   useLayoutEffect(() => {
     const storedTheme = localStorage.getItem(THEME_KEY);
 
@@ -58,6 +46,5 @@ export const ThemeProvider = ({ children }: ThemeProviderProps): ReturnType<type
     document.documentElement.classList.remove('dark');
     setCurrentTheme(ThemeTypes.LIGHT);
   }, []);
-
   return <ThemeContext.Provider value={contextValues}>{children}</ThemeContext.Provider>;
 };

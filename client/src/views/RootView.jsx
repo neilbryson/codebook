@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React from 'react';
 import { NOT_FOUND } from 'redux-first-router';
 
 import { useAppSelector } from '../hooks/redux';
@@ -7,11 +7,11 @@ import { CodeEditorView } from './CodeEditorView';
 import { HomeView } from './HomeView';
 import { MasterView } from './MasterView';
 
-function wrapMasterView(tree: ReactNode): ReturnType<typeof MasterView> {
+function wrapMasterView(tree) {
   return <MasterView>{tree}</MasterView>;
 }
 
-export const RootView = (): ReactElement | null => {
+export const RootView = () => {
   const locationType = useAppSelector((state) => state.location.type);
 
   switch (locationType) {

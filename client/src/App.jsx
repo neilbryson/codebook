@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 
 import { ThemeProvider } from './contexts/Theme';
 import { store } from './redux/configureStore';
 import { RootView } from './views/RootView';
 
-export const App = (): ReactElement => {
+export const App = () => {
   return (
     <Provider store={store}>
       <ThemeProvider>

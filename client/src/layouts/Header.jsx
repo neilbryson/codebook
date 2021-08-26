@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Divider } from '../components/Divider';
@@ -6,14 +6,14 @@ import { ThemeSwitcher } from '../components/ThemeSwitcher';
 import { navigateTo } from '../redux/routing/navigateTo';
 import { Routes } from '../redux/routing/routesMap';
 
-export const Header = (): ReactElement => {
+export const Header = () => {
   const dispatch = useDispatch();
 
-  function onClickHome(): void {
+  function onClickHome() {
     dispatch(navigateTo(Routes.HOME));
   }
 
-  function onClickAdd(): void {
+  function onClickAdd() {
     dispatch(navigateTo(Routes.CODE_EDITOR));
   }
 

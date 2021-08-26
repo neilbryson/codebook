@@ -1,12 +1,8 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React from 'react';
 
 import { Header } from '../layouts/Header';
 
-interface Props {
-  children: ReactNode;
-}
-
-export const MasterView = ({ children }: Props): ReactElement<HTMLDivElement> => {
+export const MasterView = ({ children }) => {
   return (
     <div className="flex flex-col h-full w-full">
       <Header />
