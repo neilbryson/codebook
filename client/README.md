@@ -21,3 +21,8 @@ npm start
 ```bash
 npm run build
 ```
+
+## Not familiar with TypeScript?
+
+Switch to the [`js` branch](https://github.com/neilbryson/codebook/tree/js) to
+use the JavaScript version.
