@@ -1,6 +1,7 @@
 declare module 'constants/storageKeys' {
   export const THEME_KEY = 'codebook-theme';
 }
+
 declare module 'contexts/Theme' {
   import React, { ReactNode } from 'react';
   export enum ThemeTypes {
@@ -18,10 +19,11 @@ declare module 'contexts/Theme' {
   export const useTheme: () => ThemeContextProps;
   export const ThemeProvider: ({ children }: ThemeProviderProps) => ReturnType<typeof ThemeContext.Provider>;
 }
+
 declare module 'types/Redux' {
   import type { Action as ReduxAction } from 'redux';
   import type { ThunkAction as TAction } from 'redux-thunk';
-  import type { RootState } from 'src/redux/configureStore';
+  import type { RootState } from 'redux/configureStore';
   export type Action<T, P extends unknown = undefined> = P extends undefined
     ? ReduxAction<T>
     : ReduxAction<T> & {
@@ -29,6 +31,7 @@ declare module 'types/Redux' {
       };
   export type ThunkAction<A extends ReduxAction> = TAction<void, RootState, void, A>;
 }
+
 declare module 'redux/code/types' {
   import type { Action } from 'types/Redux';
   export enum ThunkActions {
@@ -63,16 +66,19 @@ declare module 'redux/code/types' {
     | GetCodeListSuccess
     | GetCodeListError;
 }
+
 declare module 'redux/code/reducers' {
-  import * as types from 'src/redux/code/types';
+  import * as types from 'redux/code/types';
   export function code(state: types.CodeState | undefined, action: types.CodeActions): types.CodeState;
 }
+
 declare module 'redux/rootReducer' {
-  import { code } from 'src/redux/code/reducers';
+  import { code } from 'redux/code/reducers';
   export const rootReducer: {
     code: typeof code;
   };
 }
+
 declare module 'redux/routing/routesMap' {
   import type { RoutesMap } from 'redux-first-router';
   export enum Routes {
@@ -81,23 +87,19 @@ declare module 'redux/routing/routesMap' {
   }
   export const routesMap: RoutesMap;
 }
+
 declare module 'redux/configureStore' {
   export const store: import('redux').Store<
     import('redux').EmptyObject & {
       location: import('redux-first-router').LocationState<{}, any>;
       code: import('src/redux/code/types').CodeState;
     },
-    import('redux').AnyAction | import('src/redux/code/types').CodeActions
+    import('redux').AnyAction | import('redux/code/types').CodeActions
   >;
   export type RootState = ReturnType<typeof store.getState>;
   export type AppDispatch = ReturnType<typeof store.dispatch>;
 }
-declare module 'hooks/redux' {
-  import { TypedUseSelectorHook } from 'react-redux';
-  import type { RootState } from 'src/redux/configureStore';
-  export const useAppDispatch: () => import('redux').AnyAction | import('src/redux/code/types').CodeActions;
-  export const useAppSelector: TypedUseSelectorHook<RootState>;
-}
+
 declare module 'components/Button' {
   import { ButtonHTMLAttributes, ReactElement } from 'react';
   export const Button: ({
@@ -105,6 +107,7 @@ declare module 'components/Button' {
     ...other
   }: ButtonHTMLAttributes<HTMLButtonElement>) => ReactElement<HTMLButtonElement>;
 }
+
 declare module 'components/TextInput' {
   import { InputHTMLAttributes, ReactElement } from 'react';
   export const TextInput: ({
@@ -112,13 +115,16 @@ declare module 'components/TextInput' {
     ...other
   }: InputHTMLAttributes<HTMLInputElement>) => ReactElement<HTMLInputElement>;
 }
+
 declare module 'utilities/detectLanguage' {
   export function detectLanguage(fileName: string): string;
 }
+
 declare module 'views/CodeEditorView' {
   import { ReactElement } from 'react';
   export const CodeEditorView: () => ReactElement<HTMLElement>;
 }
+
 declare module 'components/CodePreview' {
   import { HTMLAttributes } from 'react';
   interface Props {
@@ -139,18 +145,20 @@ declare module 'utilities/api' {
     options?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>>;
 }
+
 declare module 'redux/code/actions' {
   import type { ThunkAction } from 'types/Redux';
-  import * as types from 'src/redux/code/types';
+  import * as types from 'redux/code/types';
   export function getCodeList(
     pageSize?: number,
     pageNumber?: number,
     sortDescending?: boolean
   ): ThunkAction<types.GetCodeListStart | types.GetCodeListSuccess | types.GetCodeListError>;
 }
+
 declare module 'redux/routing/navigateTo' {
   import type { ActionMetaLocation, Meta } from 'redux-first-router';
-  import { Routes } from 'src/redux/routing/routesMap';
+  import { Routes } from 'redux/routing/routesMap';
   export function navigateTo(
     route: Routes,
     payload?: Record<string, unknown>,
@@ -161,21 +169,26 @@ declare module 'redux/routing/navigateTo' {
     type: Routes;
   };
 }
+
 declare module 'views/HomeView' {
   import { ReactElement } from 'react';
   export const HomeView: () => ReactElement;
 }
+
 declare module 'components/Divider' {
   export const Divider: () => JSX.Element;
 }
+
 declare module 'components/ThemeSwitcher' {
   import { ReactElement } from 'react';
   export const ThemeSwitcher: () => ReactElement<HTMLDivElement>;
 }
+
 declare module 'layouts/Header' {
   import { ReactElement } from 'react';
   export const Header: () => ReactElement;
 }
+
 declare module 'views/MasterView' {
   import { ReactElement, ReactNode } from 'react';
   interface Props {
@@ -183,10 +196,12 @@ declare module 'views/MasterView' {
   }
   export const MasterView: ({ children }: Props) => ReactElement<HTMLDivElement>;
 }
+
 declare module 'views/RootView' {
   import { ReactElement } from 'react';
   export const RootView: () => ReactElement | null;
 }
+
 declare module 'App' {
   import { ReactElement } from 'react';
   export const App: () => ReactElement;

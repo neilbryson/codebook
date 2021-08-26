@@ -1,17 +1,17 @@
 import CodeMirror from 'codemirror';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Button } from '../components/Button';
 import { TextInput } from '../components/TextInput';
 import { ThemeTypes, useTheme } from '../contexts/Theme';
-import { useAppSelector } from '../hooks/redux';
 import { detectLanguage } from '../utilities/detectLanguage';
 
 export const CodeEditorView = () => {
   const { currentTheme } = useTheme();
   const editorRef = useRef(null);
   const editorInstance = useRef(null);
-  const { codeIds, codeList, locationPayload } = useAppSelector((state) => ({
+  const { codeIds, codeList, locationPayload } = useSelector((state) => ({
     codeIds: state.code.codeIds,
     codeList: state.code.codeList,
     locationPayload: state.location.payload,

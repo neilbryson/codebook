@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { CodePreview } from '../components/CodePreview';
-import { useAppSelector } from '../hooks/redux';
 import { getCodeList } from '../redux/code/actions';
 import { navigateTo } from '../redux/routing/navigateTo';
 import { Routes } from '../redux/routing/routesMap';
 
 export const HomeView = () => {
   const dispatch = useDispatch();
-  const { codeIds, codeList } = useAppSelector((state) => ({
+  const { codeIds, codeList } = useSelector((state) => ({
     codeIds: state.code.codeIds,
     codeList: state.code.codeList,
   }));

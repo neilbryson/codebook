@@ -1,7 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NOT_FOUND } from 'redux-first-router';
 
-import { useAppSelector } from '../hooks/redux';
 import { Routes } from '../redux/routing/routesMap';
 import { CodeEditorView } from './CodeEditorView';
 import { HomeView } from './HomeView';
@@ -12,7 +12,7 @@ function wrapMasterView(tree) {
 }
 
 export const RootView = () => {
-  const locationType = useAppSelector((state) => state.location.type);
+  const locationType = useSelector((state) => state.location.type);
 
   switch (locationType) {
     case Routes.HOME:
