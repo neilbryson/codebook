@@ -1,6 +1,6 @@
 import type { Action } from '../../types/Redux';
 
-export enum ThunkActions {
+export const enum ThunkActions {
   ADD_CODE_START = 'code/ADD_CODE_START',
   ADD_CODE_SUCCESS = 'code/ADD_CODE_SUCCESS',
   ADD_CODE_ERROR = 'code/ADD_CODE_ERROR',
